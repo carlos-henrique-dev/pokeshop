@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  color: ${(props) => props.theme.colors.main};
+  background-color: ${(props) => props.theme.colors.main};
 `;
 
-// `createGlobalStyle` and `css` also works fine
+export const Header = styled.div`
+  background-color: red;
+  width: 100%;
+  height: 50px;
+`;

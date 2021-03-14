@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <Layout>
       <div>
-        <pre>{JSON.stringify({ data, fetching, error }, null, 2)}</pre>
+        <pre style={{ margin: 0 }}>{JSON.stringify({ data, fetching, error }, null, 2)}</pre>
       </div>
     </Layout>
   );
