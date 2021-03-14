@@ -1,32 +1,9 @@
+import { useQuery, UseQueryResponse } from "urql";
 import Layout from "../components/shared/Layout";
-
-import { useQuery } from "urql";
-
-const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
-  pokemons(limit: $limit, offset: $offset) {
-    count
-    next
-    previous
-    status
-    message
-    results {
-      url
-      name
-      image
-    }
-  }
-}`;
-
-const gqlVariables = {
-  limit: 2,
-  offset: 1,
-};
+import { Pokemons } from "../generated/graphql";
 
 export default function Home() {
-  const [result, reexecuteQuery] = useQuery({
-    query: gqlQuery,
-    // onError:
-  });
+  const [result] = useQuery<UseQueryResponse>({ query: Pokemons });
 
   const { data, fetching, error } = result;
 

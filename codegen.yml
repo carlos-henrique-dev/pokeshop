@@ -1,0 +1,16 @@
+overwrite: true
+schema: "https://graphql-pokeapi.vercel.app/api/graphql"
+documents: "src/**/*.graphql"
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-document-nodes"
+      - "urql-introspection"
+  src/generated/graphql.d.ts:
+    plugins:
+      - "typescript-graphql-files-modules"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
