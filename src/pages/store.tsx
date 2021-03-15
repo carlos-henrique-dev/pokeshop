@@ -5,7 +5,13 @@ import Store from "../components/Store";
 import Loading from "../components/shared/Loading";
 import Error from "../components/shared/Error";
 import { useDispatch, useSelector } from "react-redux";
-import { addQueryToPokeStore, addToPokeStore, incrementOffset, resetOffset } from "../store/duck/pokeStore";
+import {
+  addQueryToPokeStore,
+  addToPokeStore,
+  clearPokeStore,
+  incrementOffset,
+  resetOffset,
+} from "../store/duck/pokeStore";
 import { ReduxState } from "../store";
 
 function StorePage() {
@@ -16,6 +22,7 @@ function StorePage() {
   const { pokemons, offset, limit } = pokeStore;
 
   const [loadMore, { loading, error, data }] = useGetPokemonsLazyQuery({
+    notifyOnNetworkStatusChange: true,
     variables: { limit, offset },
     fetchPolicy: "network-only",
     onCompleted: (data) => {
@@ -26,7 +33,8 @@ function StorePage() {
     },
   });
 
-  const [queryPokemon] = useGetPokemonLazyQuery({
+  const [queryPokemon, { loading: loadingQuery }] = useGetPokemonLazyQuery({
+    notifyOnNetworkStatusChange: true,
     fetchPolicy: "network-only",
     onCompleted: (data) => {
       if (data?.pokemon?.id) {
@@ -36,6 +44,7 @@ function StorePage() {
         const image = sprites?.front_default || "";
         dispatch(addQueryToPokeStore({ id, name, image, url: "" }));
       } else {
+        dispatch(clearPokeStore());
         setMessage("Pokemon não encontrado");
       }
     },
@@ -56,15 +65,17 @@ function StorePage() {
       await dispatch(resetOffset());
       loadMore();
     } else {
-      queryPokemon({ variables: { name: query } });
+      queryPokemon({ variables: { name: query.toLowerCase() } });
     }
   }
 
   return (
     <Layout alignCenter={false}>
-      {loading && <Loading />}
-      {!loading && data && <Store data={pokemons} loadMore={onLoadMore} onQuery={handleQuery} message={message} />}
-      {!loading && error && <Error />}
+      {(loading || loadingQuery) && <Loading />}
+      {(!loading || !loadingQuery) && data && (
+        <Store data={pokemons} loadMore={onLoadMore} onQuery={handleQuery} message={message} />
+      )}
+      {(!loading || !loadingQuery) && error && <Error />}
     </Layout>
   );
 }

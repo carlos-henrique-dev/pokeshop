@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { StoreContainer, LoadMore, SearchBar, SearchTip } from "./styles";
+import { StoreContainer, LoadMore, SearchBar, SearchTip, NotFoundMessage } from "./styles";
 import { Card, Name, Image, ActionButtons, AddToPokedexIcon, IsOnPokedexIcon, SeeMore } from "../shared/Card/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { addToPokedex } from "../../store/duck/pokedex";
@@ -53,7 +53,7 @@ function Store({ data, loadMore, onQuery, message }: Props) {
           <br /> (para limpar a busca e mostrar todos, basta fazer uma pesquisa vazia)
         </SearchTip>
       </>
-      {message !== "" && <span>{message}</span>}
+      {message !== "" && <NotFoundMessage>{message}</NotFoundMessage>}
       <StoreContainer>
         {data?.map((pokemon: PokemonInfo) => (
           <Card key={pokemon.id + Math.random().toString(36).substring(7)}>

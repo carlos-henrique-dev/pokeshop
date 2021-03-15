@@ -16,6 +16,12 @@ export const SearchTip = styled.span`
   text-align: center;
 `;
 
+export const NotFoundMessage = styled.span`
+  color: #ff8b8e;
+  font-size: 30px;
+  margin-top: 10px;
+`;
+
 export const StoreContainer = styled.div`
   width: 100%;
   display: grid;
