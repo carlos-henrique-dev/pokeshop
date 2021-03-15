@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IoIosAddCircleOutline, IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 export const StoreContainer = styled.div`
   width: 100%;
@@ -77,18 +77,13 @@ export const SeeMore = styled.a`
   }
 `;
 
-export const AddToPokedexIcon = styled(IoIosAddCircleOutline)`
+export const RemoveFromPokedexIcon = styled(MdDelete)`
   cursor: pointer;
-  color: ${(props) => props.theme.colors.main};
+  color: #ff8b8e;
   transition: all 0.3s;
   font-size: 30px;
 
   &:hover {
     transform: scale(1.05);
   }
-`;
-
-export const IsOnPokedexIcon = styled(IoIosCheckmarkCircleOutline)`
-  color: ${(props) => props.theme.colors.main};
-  font-size: 30px;
 `;

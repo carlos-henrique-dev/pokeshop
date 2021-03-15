@@ -11,7 +11,7 @@ function Home() {
         <Link href="/store">
           <StyledLink>Ver loja</StyledLink>
         </Link>
-        <Link href="/store">
+        <Link href="/pokedex">
           <StyledLink href="">Ver minha pokedex</StyledLink>
         </Link>
       </ButtonContainer>

@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReduxState } from "../../../store";
 import { selectTheme } from "../../../store/duck/theme";
 import { Container, HeaderContainer, ThemesIcons, Logo, Main, Footer } from "./styles";
+import Link from "next/link";
 
 export type Layout = {
-  children: JSX.Element | JSX.Element[] | False;
+  children: JSX.Element | JSX.Element[] | any;
 };
 
 function Header() {
-  const { theme } = useSelector((state: ReduxState) => state);
+  const { theme } = useSelector((state: ReduxState) => state).theme;
 
   const dispatch = useDispatch();
 
@@ -19,26 +20,28 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <Logo>PokeShop</Logo>
+      <Link href="/">
+        <Logo>PokeShop</Logo>
+      </Link>
 
       <div>
         <ThemesIcons
           src="/bullbasaur.ico"
           id="BulbasaurTheme"
           onClick={handleThemeChange}
-          isActive={theme.theme.name === "BulbasaurTheme"}
+          isActive={theme.name === "BulbasaurTheme"}
         />
         <ThemesIcons
           src="/charmander.ico"
           id="CharmanderTheme"
           onClick={handleThemeChange}
-          isActive={theme.theme.name === "CharmanderTheme"}
+          isActive={theme.name === "CharmanderTheme"}
         />
         <ThemesIcons
           src="/squirtle.ico"
           id="SquirtleTheme"
           onClick={handleThemeChange}
-          isActive={theme.theme.name === "SquirtleTheme"}
+          isActive={theme.name === "SquirtleTheme"}
         />
       </div>
     </HeaderContainer>

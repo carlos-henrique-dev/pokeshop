@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { Card, Name, StoreContainer, Image, ActionButtons, CartIcon, SeeMore } from "./styles";
+import { Card, Name, StoreContainer, Image, ActionButtons, AddToPokedexIcon, IsOnPokedexIcon, SeeMore } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { addToPokedex } from "../../store/duck/pokedex";
+import { ReduxState } from "../../store";
 
 type PokemonInfo = {
   id: number;
@@ -21,6 +24,17 @@ type Props = {
 
 function Store({ data }: Props) {
   const { pokemons } = data;
+  const { pokedex } = useSelector((state: ReduxState) => state);
+
+  const dispatch = useDispatch();
+
+  function handleAdd(pokemon: any) {
+    dispatch(addToPokedex(pokemon));
+  }
+
+  function isOnPokedex(id: number) {
+    return pokedex.pokemons.some((pokemon) => pokemon.id === id);
+  }
 
   return (
     <StoreContainer>
@@ -32,7 +46,7 @@ function Store({ data }: Props) {
             <Link href="#">
               <SeeMore>Ver Detalhes</SeeMore>
             </Link>
-            <CartIcon />
+            {isOnPokedex(pokemon.id) ? <IsOnPokedexIcon /> : <AddToPokedexIcon onClick={() => handleAdd(pokemon)} />}
           </ActionButtons>
         </Card>
       ))}

@@ -20,6 +20,7 @@ export const HeaderContainer = styled.div`
 export const Logo = styled.h1`
   color: ${(props) => props.theme.colors.thirdVariant};
   text-shadow: 2px 2px ${(props) => props.theme.colors.main};
+  cursor: pointer;
 `;
 
 interface ThemesIconsProps {
