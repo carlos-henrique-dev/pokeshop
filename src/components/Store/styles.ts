@@ -1,12 +1,27 @@
 import styled from "styled-components";
 
+export const SearchBar = styled.input`
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  margin-top: 100px;
+  text-align: center;
+`;
+
+export const SearchTip = styled.span`
+  color: #585858;
+  font-size: 13px;
+  text-align: center;
+`;
+
 export const StoreContainer = styled.div`
   width: 100%;
-  min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(auto-fill, 230px);
   grid-gap: 1rem;
-  padding: 100px 0 50px;
+  padding: 20px 0 50px;
   justify-content: center;
 
   @media (max-width: 801px) {
