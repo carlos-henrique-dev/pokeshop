@@ -11,10 +11,6 @@ export const ErrorContainer = styled.div`
 export const ErrorIcon = styled(BiError)`
   width: 100px;
   height: 100px;
-  animation-name: spin;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
   color: #ff8b8e;
 `;
 

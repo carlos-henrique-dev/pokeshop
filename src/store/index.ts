@@ -7,13 +7,15 @@ import { loadState, saveState } from "../lib/localStorage";
 
 import theme, { ThemeState } from "./duck/theme";
 import pokedex, { PokedexState } from "./duck/pokedex";
+import pokeStore, { PokeStoreState } from "./duck/pokeStore";
 
 export type ReduxState = {
   theme: ThemeState;
   pokedex: PokedexState;
+  pokeStore: PokeStoreState;
 };
 
-const reducers = combineReducers({ theme, pokedex });
+const reducers = combineReducers({ theme, pokedex, pokeStore });
 
 let store: any;
 

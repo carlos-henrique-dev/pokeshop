@@ -1,24 +1,21 @@
 import { useRouter } from "next/router";
-import { useQuery, UseQueryResponse } from "urql";
 import Layout from "../../components/shared/Layout";
-import { GetPokemon } from "../../generated/graphql";
+import { useGetPokemonQuery } from "../../generated/graphql";
 import Loading from "../../components/shared/Loading";
 import Error from "../../components/shared/Error";
 import PokemonDetails from "../../components/PokemonDetails";
 
 const Pokemon = () => {
   const router = useRouter();
-  const { name } = router.query;
+  const { name = "" } = router.query;
 
-  const [result] = useQuery<UseQueryResponse>({ query: GetPokemon, variables: { name } });
-
-  const { data, fetching, error } = result;
+  const { loading, error, data } = useGetPokemonQuery({ variables: { name: name as string } });
 
   return (
     <Layout>
-      {fetching && <Loading />}
-      {!fetching && data && <PokemonDetails data={data} />}
-      {!fetching && error && <Error />}
+      {loading && <Loading />}
+      {!loading && data && <PokemonDetails data={data} />}
+      {!loading && error && <Error />}
     </Layout>
   );
 };

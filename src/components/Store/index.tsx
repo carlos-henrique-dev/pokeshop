@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { StoreContainer } from "./styles";
+import { StoreContainer, LoadMore } from "./styles";
 import { Card, Name, Image, ActionButtons, AddToPokedexIcon, IsOnPokedexIcon, SeeMore } from "../shared/Card/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { addToPokedex } from "../../store/duck/pokedex";
@@ -14,17 +14,11 @@ type PokemonInfo = {
 };
 
 type Props = {
-  data: {
-    [key: string]: any;
-    pokemons?: {
-      [key: string]: any;
-      results: PokemonInfo[];
-    };
-  };
+  data: PokemonInfo[];
+  loadMore: (e: any) => void;
 };
 
-function Store({ data }: Props) {
-  const { pokemons } = data;
+function Store({ data, loadMore }: Props) {
   const { pokedex } = useSelector((state: ReduxState) => state);
 
   const dispatch = useDispatch();
@@ -38,20 +32,23 @@ function Store({ data }: Props) {
   }
 
   return (
-    <StoreContainer>
-      {pokemons?.results.map((pokemon: PokemonInfo) => (
-        <Card key={pokemon.id}>
-          <Image src={pokemon.image} alt={pokemon.name} />
-          <Name>{pokemon.name}</Name>
-          <ActionButtons>
-            <Link href={`/pokemon/${pokemon.name}`}>
-              <SeeMore>Ver Detalhes</SeeMore>
-            </Link>
-            {isOnPokedex(pokemon.id) ? <IsOnPokedexIcon /> : <AddToPokedexIcon onClick={() => handleAdd(pokemon)} />}
-          </ActionButtons>
-        </Card>
-      ))}
-    </StoreContainer>
+    <>
+      <StoreContainer>
+        {data?.map((pokemon: PokemonInfo) => (
+          <Card key={pokemon.id + Math.random().toString(36).substring(7)}>
+            <Image src={pokemon.image} alt={pokemon.name} />
+            <Name>{pokemon.name}</Name>
+            <ActionButtons>
+              <Link href={`/pokemon/${pokemon.name}`}>
+                <SeeMore>Ver Detalhes</SeeMore>
+              </Link>
+              {isOnPokedex(pokemon.id) ? <IsOnPokedexIcon /> : <AddToPokedexIcon onClick={() => handleAdd(pokemon)} />}
+            </ActionButtons>
+          </Card>
+        ))}
+      </StoreContainer>
+      <LoadMore onClick={loadMore}>Carregar Mais</LoadMore>
+    </>
   );
 }
 

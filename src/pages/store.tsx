@@ -1,21 +1,45 @@
 import React from "react";
-import { useQuery, UseQueryResponse } from "urql";
-import { GetPokemons } from "../generated/graphql";
+import { useGetPokemonsLazyQuery } from "../generated/graphql";
 import Layout from "../components/shared/Layout";
 import Store from "../components/Store";
 import Loading from "../components/shared/Loading";
 import Error from "../components/shared/Error";
+import { useDispatch, useSelector } from "react-redux";
+import { addToPokeStore, incrementOffset } from "../store/duck/pokeStore";
+import { ReduxState } from "../store";
 
 function store() {
-  const [result] = useQuery<UseQueryResponse>({ query: GetPokemons, variables: { limit: 20, offset: 0 } });
+  const dispatch = useDispatch();
 
-  const { data, fetching, error } = result;
+  const { pokeStore } = useSelector((state: ReduxState) => state);
+  const { pokemons, offset, limit } = pokeStore;
+
+  const [loadMore, { loading, error, data }] = useGetPokemonsLazyQuery({
+    variables: { limit, offset },
+    fetchPolicy: "network-only",
+    onCompleted: (data) => {
+      if (data.pokemons?.results) {
+        dispatch(addToPokeStore(data?.pokemons?.results));
+        console.log("after", [...pokemons, ...data.pokemons.results]);
+      }
+    },
+  });
+
+  React.useEffect(() => {
+    loadMore();
+  }, []);
+
+  async function onLoadMore(e: any) {
+    e.preventDefault();
+    await dispatch(incrementOffset());
+    loadMore();
+  }
 
   return (
     <Layout>
-      {fetching && <Loading />}
-      {!fetching && data && <Store data={data} />}
-      {!fetching && error && <Error />}
+      {loading && <Loading />}
+      {!loading && data && <Store data={pokemons} loadMore={onLoadMore} />}
+      {!loading && error && <Error />}
     </Layout>
   );
 }

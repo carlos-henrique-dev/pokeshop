@@ -1,7 +1,8 @@
 import { AppProps } from "next/app";
 
-import { NextComponentType } from "next-urql";
-import { UrqlHOC } from "../lib/UrqlClient";
+import client from "../lib/ApolloClient";
+
+import { ApolloProvider } from "@apollo/client";
 
 import { Provider as ReduxProvider, useSelector } from "react-redux";
 import { ReduxState, useStore } from "../store";
@@ -21,11 +22,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ReduxProvider store={store}>
-      <ThemeWrapper>
-        <Component {...pageProps} />
-      </ThemeWrapper>
+      <ApolloProvider client={client}>
+        <ThemeWrapper>
+          <Component {...pageProps} />
+        </ThemeWrapper>
+      </ApolloProvider>
     </ReduxProvider>
   );
 }
 
-export default UrqlHOC(MyApp as NextComponentType);
+export default MyApp;
