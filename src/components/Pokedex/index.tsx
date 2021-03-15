@@ -27,18 +27,11 @@ function Pokedex() {
     return <span>Total de pokemons: {pokemons.length}</span>;
   }
 
-  function renderPokedexStatistics() {
-    return <span>Total de pokemons: {pokemons.length}</span>;
-  }
-
   return (
     <PokedexContainer>
       <Title>Minha Pokedex</Title>
 
-      <Statistics>
-        {renderPokedexSize()}
-        {renderPokedexStatistics()}
-      </Statistics>
+      <Statistics>{renderPokedexSize()}</Statistics>
       <PokedexItems>
         {pokemons.map((pokemon: PokemonInfo) => (
           <Card key={pokemon.id}>

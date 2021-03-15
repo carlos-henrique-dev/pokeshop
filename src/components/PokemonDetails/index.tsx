@@ -1,5 +1,13 @@
 import React from "react";
-import { AddToPokedexButton, BackButton, ButtonsContainer, DetailContainer, GoToPokedexButton } from "./styles";
+import {
+  AddToPokedexButton,
+  BackButton,
+  ButtonsContainer,
+  DetailContainer,
+  GoToPokedexButton,
+  InfoContainer,
+  InfoTitle,
+} from "./styles";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ReduxState } from "../../store";
@@ -38,7 +46,7 @@ function PokemonDetails({ data }: Props) {
       <ButtonsContainer>
         <BackButton onClick={() => router.back()}>Voltar</BackButton>
         <Link href="/pokedex">
-          <GoToPokedexButton>Ver minha pokedex</GoToPokedexButton>
+          <GoToPokedexButton>Ver pokedex</GoToPokedexButton>
         </Link>
         {!isOnPokedex(pokemon.id) && (
           <AddToPokedexButton onClick={() => handleAdd(pokemon)}>Adicionar na pokedex</AddToPokedexButton>
@@ -47,48 +55,52 @@ function PokemonDetails({ data }: Props) {
       <img src={pokemon.sprites.front_default} alt="" />
       <span>{pokemon.name}</span>
 
-      <div>
-        <h1>Tipos</h1>
+      <InfoContainer>
+        <InfoTitle>Tipos de dano</InfoTitle>
         <ul>
           {pokemon.types.map((type: any) => (
             <li>{type.type.name}</li>
           ))}
         </ul>
-      </div>
-      <div>
-        <h1>Habilidades</h1>
+      </InfoContainer>
+      <InfoContainer>
+        <InfoTitle>Habilidades</InfoTitle>
         <ul>
           {pokemon.abilities.map((ability: any) => (
             <li>{ability.ability.name}</li>
           ))}
         </ul>
-      </div>
-      <div>
-        <h1>Formas</h1>
+      </InfoContainer>
+      <InfoContainer>
+        <InfoTitle>Formas</InfoTitle>
         <ul>
           {pokemon.forms.map((form: any) => (
             <li>{form.name}</li>
           ))}
         </ul>
-      </div>
-      <div>
-        <h1>Status</h1>
+      </InfoContainer>
+      <InfoContainer>
+        <InfoTitle>Status</InfoTitle>
         <ul>
           {pokemon.stats.map((stat: any) => (
             <li>
-              Descrição: {stat.stat.name} - Esforço: {stat.effort} - Status base: {stat.base_stat}
+              {stat.stat.name}
+              <ul>
+                <li>Esforço: {stat.effort}</li>
+                <li>Status base: {stat.base_stat}</li>
+              </ul>
             </li>
           ))}
         </ul>
-      </div>
-      <div>
-        <h1>Movimentos</h1>
+      </InfoContainer>
+      <InfoContainer>
+        <InfoTitle>Movimentos</InfoTitle>
         <ul>
           {pokemon.moves.map((move: any) => (
             <li>{move.move.name}</li>
           ))}
         </ul>
-      </div>
+      </InfoContainer>
     </DetailContainer>
   );
 }
