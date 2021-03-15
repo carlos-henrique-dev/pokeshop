@@ -1,33 +1,26 @@
-import { CgPokemon } from "react-icons/cg";
 import styled from "styled-components";
+import { BiError } from "react-icons/bi";
 
-export const LoadingContainer = styled.div`
+export const ErrorContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
-export const LoadingIcon = styled(CgPokemon)`
+export const ErrorIcon = styled(BiError)`
   width: 100px;
   height: 100px;
   animation-name: spin;
-  animation-duration: 2000ms;
+  animation-duration: 5000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  color: ${(props) => props.theme.colors.secondary};
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+  color: #ff8b8e;
 `;
 
 export const Message = styled.span`
+  text-align: center;
   color: white;
   margin-top: 20px;
+  font-size: 20px;
 `;
