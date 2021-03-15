@@ -1,33 +1,63 @@
 import Head from "next/head";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ReduxState } from "../../../store";
 import { selectTheme } from "../../../store/duck/theme";
-import { CharmanderTheme } from "../../../theme";
-import { Container, Header } from "./styles";
+import { Container, HeaderContainer, ThemesIcons, Logo, Main, Footer } from "./styles";
 
 export type Layout = {
   children: JSX.Element | JSX.Element[];
 };
 
-function Layout({ children }: Layout) {
+function Header() {
+  const { theme } = useSelector((state: ReduxState) => state);
+  console.log(theme);
+
   const dispatch = useDispatch();
 
-  const handleThemeChange = (theme: string) => {
-    dispatch(selectTheme(theme));
+  const handleThemeChange = (e: any) => {
+    dispatch(selectTheme(e.target.id));
   };
 
+  return (
+    <HeaderContainer>
+      <Logo>PokeShop</Logo>
+
+      <div>
+        <ThemesIcons
+          src="/bullbasaur.ico"
+          id="BulbasaurTheme"
+          onClick={handleThemeChange}
+          isActive={theme.theme.name === "BulbasaurTheme"}
+        />
+        <ThemesIcons
+          src="/charmander.ico"
+          id="CharmanderTheme"
+          onClick={handleThemeChange}
+          isActive={theme.theme.name === "CharmanderTheme"}
+        />
+        <ThemesIcons
+          src="/squirtle.ico"
+          id="SquirtleTheme"
+          onClick={handleThemeChange}
+          isActive={theme.theme.name === "SquirtleTheme"}
+        />
+      </div>
+    </HeaderContainer>
+  );
+}
+
+function Layout({ children }: Layout) {
   return (
     <Container>
       <Head>
         <title>PokeShop</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header>
-        <button onClick={() => handleThemeChange("BulbasaurTheme")}>Bulbasaur</button>
-        <button onClick={() => handleThemeChange("CharmanderTheme")}>Charmander</button>
-        <button onClick={() => handleThemeChange("SquirtleTheme")}>Squirtle</button>
-      </Header>
-      <main>{children}</main>
-      <footer>Made with ❤ in Switzerland</footer>
+
+      <Header />
+
+      <Main>{children}</Main>
+      <Footer>Made with ❤ by Carlos Henrique</Footer>
     </Container>
   );
 }
