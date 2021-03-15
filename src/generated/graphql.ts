@@ -274,7 +274,7 @@ export type PokemonsQuery = (
     & Pick<PokemonList, 'count' | 'next' | 'previous' | 'status' | 'message'>
     & { results?: Maybe<Array<Maybe<(
       { __typename?: 'PokemonItem' }
-      & Pick<PokemonItem, 'url' | 'name' | 'image'>
+      & Pick<PokemonItem, 'id' | 'url' | 'name' | 'image'>
     )>>> }
   )> }
 );
@@ -289,6 +289,7 @@ export const Pokemons = gql`
     status
     message
     results {
+      id
       url
       name
       image

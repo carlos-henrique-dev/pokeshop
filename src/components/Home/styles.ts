@@ -37,21 +37,23 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const StyledLink = styled.a`
+  text-decoration: none;
+  text-align: center;
   width: 250px;
-  height: 60px;
+  padding: 20px 0;
   border-radius: 5px;
-  outline: none;
-  border: none;
   margin: 10px;
   color: white;
   font-size: 20px;
   font-weight: bolder;
   background-color: ${(props) => props.theme.colors.secondary};
   cursor: pointer;
+  transition: all 0.3s;
 
   &:active {
     background-color: ${(props) => props.theme.colors.main};
     color: ${(props) => props.theme.colors.secondVariant};
+    transform: scale(0.95);
   }
 `;

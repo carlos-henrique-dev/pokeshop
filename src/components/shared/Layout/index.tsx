@@ -5,12 +5,11 @@ import { selectTheme } from "../../../store/duck/theme";
 import { Container, HeaderContainer, ThemesIcons, Logo, Main, Footer } from "./styles";
 
 export type Layout = {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | False;
 };
 
 function Header() {
   const { theme } = useSelector((state: ReduxState) => state);
-  console.log(theme);
 
   const dispatch = useDispatch();
 
