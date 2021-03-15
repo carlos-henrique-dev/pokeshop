@@ -25,6 +25,7 @@ export const BackButton = styled.button`
   font-size: 14px;
   font-weight: bold;
   transition: all 0.3s;
+  cursor: pointer;
 
   &:active {
     transform: scale(0.95);

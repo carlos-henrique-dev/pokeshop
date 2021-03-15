@@ -1,34 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PokeShop
 
-## Getting Started
+## Sobre o projeto
+Pokedex desenvolvida com ``Next.js`` e `Styled Components`.
 
-First, run the development server:
+## Online no netlify
+[Clique aqui para acessar o projeto no netlify](https://wonderful-meitner-b75607.netlify.app/)
 
-```bash
-npm run dev
-# or
+## Configurações iniciais
+
+Instale as dependências do projeto rodando o comando:
+```
+yarn
+```
+Depois inicie o servidor com o comando:
+```
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Bibliotecas utilizadas
+- [GraphQl Code Generator](https://graphql-code-generator.com/) ;
+- [GraphQL](https://graphql.org/) (para );
+- [Redux](https://redux.js.org/);
+- [Apollo Client](https://www.apollographql.com/docs/react/) (para );
+- [Styled Components](https://styled-components.com/)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+# Screenshots
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tela inicial
+![Screenshot da tela inicial](public/screenshots/home.png "Screenshot da tela inicial")
+## Loja de pokemons
+![Screenshot da Loja de pokemons](public/screenshots/store.png "Screenshot da Loja de pokemons")
+## Pokedex
+![Screenshot da pokedex](public/screenshots/pokedex.png "Screenshot da pokedex")
+## Pokedex com o tema do Squirtle
+![Screenshot da pokedex com o tema do squirtle](public/screenshots/pokedex-squirtle.png "Screenshot da pokedex com o tema do squirtle")
+## Pokedex com o tema do charmander
+![Screenshot da tela inicial mobile](public/screenshots/pokedex-charmander.png "Screenshot da tela inicial mobile")
+## Pokedex com o tema do charmander modile
+![Screenshot da tela de checkout mobile](public/screenshots/pokedex-charmander-mobile.png "Screenshot da tela de checkout mobile")
+## loja de pokemons com o tema do charmander mobile
+![Screenshot da tela de checkout mobile](public/screenshots/store-charmander-mobile.png "Screenshot da tela de checkout mobile")
