@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Card, Name, StoreContainer, Image, ActionButtons, RemoveFromPokedexIcon, SeeMore } from "./styles";
+import { PokedexContainer, PokedexItems, Statistics, Title } from "./styles";
+import { Card, Name, Image, ActionButtons, SeeMore, RemoveFromPokedexIcon } from "../shared/Card/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromPokedex } from "../../store/duck/pokedex";
 import { ReduxState } from "../../store";
@@ -22,21 +23,37 @@ function Pokedex() {
     dispatch(removeFromPokedex(pokemonId));
   }
 
+  function renderPokedexSize() {
+    return <span>Total de pokemons: {pokemons.length}</span>;
+  }
+
+  function renderPokedexStatistics() {
+    return <span>Total de pokemons: {pokemons.length}</span>;
+  }
+
   return (
-    <StoreContainer>
-      {pokemons.map((pokemon: PokemonInfo) => (
-        <Card key={pokemon.id}>
-          <Image src={pokemon.image} alt={pokemon.name} />
-          <Name>{pokemon.name}</Name>
-          <ActionButtons>
-            <Link href="#">
-              <SeeMore>Ver Detalhes</SeeMore>
-            </Link>
-            <RemoveFromPokedexIcon onClick={() => handleAdd(pokemon.id)} />
-          </ActionButtons>
-        </Card>
-      ))}
-    </StoreContainer>
+    <PokedexContainer>
+      <Title>Minha Pokedex</Title>
+
+      <Statistics>
+        {renderPokedexSize()}
+        {renderPokedexStatistics()}
+      </Statistics>
+      <PokedexItems>
+        {pokemons.map((pokemon: PokemonInfo) => (
+          <Card key={pokemon.id}>
+            <Image src={pokemon.image} alt={pokemon.name} />
+            <Name>{pokemon.name}</Name>
+            <ActionButtons>
+              <Link href={`/pokemon/${pokemon.name}`}>
+                <SeeMore>Ver Detalhes</SeeMore>
+              </Link>
+              <RemoveFromPokedexIcon onClick={() => handleAdd(pokemon.id)} />
+            </ActionButtons>
+          </Card>
+        ))}
+      </PokedexItems>
+    </PokedexContainer>
   );
 }
 

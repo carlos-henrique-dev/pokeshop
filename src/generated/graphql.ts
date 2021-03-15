@@ -261,13 +261,13 @@ export enum CacheControlScope {
 }
 
 
-export type PokemonsQueryVariables = Exact<{
+export type GetPokemonsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type PokemonsQuery = (
+export type GetPokemonsQuery = (
   { __typename?: 'Query' }
   & { pokemons?: Maybe<(
     { __typename?: 'PokemonList' }
@@ -279,9 +279,54 @@ export type PokemonsQuery = (
   )> }
 );
 
+export type GetPokemonQueryVariables = Exact<{
+  name: Scalars['String'];
+}>;
 
-export const Pokemons = gql`
-    query pokemons($limit: Int, $offset: Int) {
+
+export type GetPokemonQuery = (
+  { __typename?: 'Query' }
+  & { pokemon?: Maybe<(
+    { __typename?: 'Pokemon' }
+    & Pick<Pokemon, 'id' | 'name' | 'base_experience'>
+    & { sprites?: Maybe<(
+      { __typename?: 'Sprite' }
+      & Pick<Sprite, 'front_default'>
+    )>, moves?: Maybe<Array<Maybe<(
+      { __typename?: 'Move' }
+      & { move?: Maybe<(
+        { __typename?: 'BaseName' }
+        & Pick<BaseName, 'name'>
+      )> }
+    )>>>, types?: Maybe<Array<Maybe<(
+      { __typename?: 'Type' }
+      & { type?: Maybe<(
+        { __typename?: 'BaseName' }
+        & Pick<BaseName, 'name'>
+      )> }
+    )>>>, abilities?: Maybe<Array<Maybe<(
+      { __typename?: 'Ability' }
+      & { ability?: Maybe<(
+        { __typename?: 'BaseName' }
+        & Pick<BaseName, 'name'>
+      )> }
+    )>>>, forms?: Maybe<Array<Maybe<(
+      { __typename?: 'BaseName' }
+      & Pick<BaseName, 'name'>
+    )>>>, stats?: Maybe<Array<Maybe<(
+      { __typename?: 'Stat' }
+      & Pick<Stat, 'effort' | 'base_stat'>
+      & { stat?: Maybe<(
+        { __typename?: 'BaseName' }
+        & Pick<BaseName, 'name'>
+      )> }
+    )>>> }
+  )> }
+);
+
+
+export const GetPokemons = gql`
+    query GetPokemons($limit: Int, $offset: Int) {
   pokemons(limit: $limit, offset: $offset) {
     count
     next
@@ -293,6 +338,43 @@ export const Pokemons = gql`
       url
       name
       image
+    }
+  }
+}
+    `;
+export const GetPokemon = gql`
+    query GetPokemon($name: String!) {
+  pokemon(name: $name) {
+    id
+    name
+    sprites {
+      front_default
+    }
+    moves {
+      move {
+        name
+      }
+    }
+    types {
+      type {
+        name
+      }
+    }
+    abilities {
+      ability {
+        name
+      }
+    }
+    base_experience
+    forms {
+      name
+    }
+    stats {
+      stat {
+        name
+      }
+      effort
+      base_stat
     }
   }
 }

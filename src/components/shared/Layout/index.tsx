@@ -7,6 +7,7 @@ import Link from "next/link";
 
 export type Layout = {
   children: JSX.Element | JSX.Element[] | any;
+  alignCenter?: boolean;
 };
 
 function Header() {
@@ -48,7 +49,7 @@ function Header() {
   );
 }
 
-function Layout({ children }: Layout) {
+function Layout({ children, alignCenter = true }: Layout) {
   return (
     <Container>
       <Head>
@@ -58,7 +59,7 @@ function Layout({ children }: Layout) {
 
       <Header />
 
-      <Main>{children}</Main>
+      <Main alignCenter={alignCenter}>{children}</Main>
       <Footer>Made with ❤ by Carlos Henrique</Footer>
     </Container>
   );

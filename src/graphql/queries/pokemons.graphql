@@ -1,4 +1,4 @@
-query pokemons($limit: Int, $offset: Int) {
+query GetPokemons($limit: Int, $offset: Int) {
   pokemons(limit: $limit, offset: $offset) {
     count
     next
@@ -10,6 +10,43 @@ query pokemons($limit: Int, $offset: Int) {
       url
       name
       image
+    }
+  }
+}
+
+query GetPokemon($name: String!) {
+  pokemon(name: $name) {
+    id
+    name
+    sprites {
+      front_default
+    }
+    moves {
+      move {
+        name
+      }
+    }
+    types {
+      type {
+        name
+      }
+    }
+    abilities {
+      ability {
+        name
+      }
+    }
+    base_experience
+    forms {
+      name
+    }
+
+    stats {
+      stat {
+        name
+      }
+      effort
+      base_stat
     }
   }
 }

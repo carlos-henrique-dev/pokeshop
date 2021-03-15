@@ -9,8 +9,7 @@ function pokedex() {
   // const { pokedex } = useSelector((state: ReduxState) => state);
 
   return (
-    <Layout>
-      <div>Minha Pokedex</div>
+    <Layout alignCenter={false}>
       <Pokedex />
     </Layout>
   );

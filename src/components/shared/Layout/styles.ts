@@ -40,12 +40,16 @@ export const ThemesIcons = styled.img<ThemesIconsProps>`
   }
 `;
 
-export const Main = styled.main`
+interface MainProps {
+  alignCenter: boolean;
+}
+
+export const Main = styled.main<MainProps>`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) => (props.alignCenter ? "center" : "")};
 `;
 
 export const Footer = styled.footer`
