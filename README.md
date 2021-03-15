@@ -3,8 +3,10 @@
 ## Sobre o projeto
 Pokedex desenvolvida com ``Next.js`` e `Styled Components`.
 
+Este app utiliza o localStorage para salvar e recuperar os pokemons salvos na pokedex do usuário
+
 ## Online no netlify
-[Clique aqui para acessar o projeto no netlify](https://wonderful-meitner-b75607.netlify.app/)
+[Clique aqui para acessar o projeto no netlify](https://focused-heyrovsky-536cf6.netlify.app/)
 
 ## Configurações iniciais
 
